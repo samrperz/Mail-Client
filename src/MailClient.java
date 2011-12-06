@@ -1,5 +1,5 @@
 import java.io.*;
-import java.net.*;
+//import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -131,9 +131,6 @@ public class MailClient extends Frame {
 				SMTPConnection connection = new SMTPConnection(envelope);
 				connection.send(envelope);
 				connection.close();
-			} catch (UnknownHostException e) {
-				/* If there is an error, do not go further */
-				return;
 			} catch (IOException error) {
 				System.out.println("Sending failed: " + error);
 				return;
