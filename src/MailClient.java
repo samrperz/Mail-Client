@@ -3,6 +3,13 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+import javax.swing.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+
+
 /* $Id: MailClient.java,v 1.7 1999/07/22 12:07:30 kangasha Exp $ */
 
 /**
@@ -10,25 +17,29 @@ import java.awt.event.*;
  * 
  * @author Jussi Kangasharju
  */
-public class MailClient extends Frame {
+public class MailClient extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/* The stuff for the GUI. */
-	private Button btSend = new Button("Send");
-	private Button btClear = new Button("Clear");
-	private Button btQuit = new Button("Quit");
-	private Label serverLabel = new Label("Local mailserver:");
-	private TextField serverField = new TextField("", 40);
-	private Label fromLabel = new Label("From:");
-	private TextField fromField = new TextField("", 40);
-	private Label toLabel = new Label("To:");
-	private TextField toField = new TextField("", 40);
-	private Label subjectLabel = new Label("Subject:");
-	private TextField subjectField = new TextField("", 40);
-	private Label messageLabel = new Label("Message:");
-	private TextArea messageText = new TextArea(10, 40);
+	// private Button btSend = new Button("Send");
+	// private Button btClear = new Button("Clear");
+	// private Button btQuit = new Button("Quit");
+	
+	private JLabel serverLabel = new JLabel("Local mailserver:");
+	private JTextField serverField = new JTextField("", 40);
+	private JLabel fromLabel = new JLabel("From:");
+	private JTextField fromField = new JTextField("", 40);
+	private JLabel toLabel = new JLabel("To:");
+	private JTextField toField = new JTextField("", 40);
+	private JLabel subjectLabel = new JLabel("Subject:");
+	private JTextField subjectField = new JTextField("", 40);
+	private JLabel messageLabel = new JLabel("Message:");
+	private JTextArea messageText = new JTextArea(10, 40);
+	private JButton btSend = new JButton("Send");
+	private JButton btClear = new JButton("Clear");
+	private JButton btQuit = new JButton("Quit");
 
 	/**
 	 * Create a new MailClient window with fields for entering all the relevant
@@ -37,16 +48,33 @@ public class MailClient extends Frame {
 	@SuppressWarnings("deprecation")
 	public MailClient() {
 		super("Java Mailclient");
+		InetAddress addr;
+		try {
+			addr = InetAddress.getLocalHost();
+			serverField.setText(addr.getHostName());
+			fromField.setText(addr.getHostAddress());
+		} catch (UnknownHostException e) {
+			//TODO: handle exception
+		}
+		
 
 		/*
 		 * Create panels for holding the fields. To make it look nice, create an
 		 * extra panel for holding all the child panels.
 		 */
-		Panel serverPanel = new Panel(new BorderLayout());
-		Panel fromPanel = new Panel(new BorderLayout());
-		Panel toPanel = new Panel(new BorderLayout());
-		Panel subjectPanel = new Panel(new BorderLayout());
-		Panel messagePanel = new Panel(new BorderLayout());
+		try {
+			
+		} catch (Exception e) {
+			//TODO: handle exception
+		}
+		
+
+
+		JPanel serverPanel = new JPanel(new BorderLayout());
+		JPanel fromPanel = new JPanel(new BorderLayout());
+		JPanel toPanel = new JPanel(new BorderLayout());
+		JPanel subjectPanel = new JPanel(new BorderLayout());
+		JPanel messagePanel = new JPanel(new BorderLayout());
 		serverPanel.add(serverLabel, BorderLayout.WEST);
 		serverPanel.add(serverField, BorderLayout.CENTER);
 		fromPanel.add(fromLabel, BorderLayout.WEST);
@@ -62,6 +90,9 @@ public class MailClient extends Frame {
 		fieldPanel.add(fromPanel);
 		fieldPanel.add(toPanel);
 		fieldPanel.add(subjectPanel);
+
+		JFrame frame = new JFrame("Mail Client");
+		frame.add(fieldPanel);
 
 		/*
 		 * Create a panel for the buttons and add listeners to the buttons.
