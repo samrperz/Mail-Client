@@ -1,6 +1,7 @@
 import java.util.*;
 import java.text.*;
 
+import java.awt.Image;
 /* $Id: Message.java,v 1.5 1999/07/22 12:10:57 kangasha Exp $ */
 
 /**
